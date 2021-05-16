@@ -4,12 +4,27 @@ require 'nokogiri'
 require 'cgi'
 
 Dir.glob('storygames/*.html') do |file|
-  page = File.read(file)
-  topic = Nokogiri::HTML(page).at_css('h1').text.gsub('?','').gsub('/',' ').gsub('!', '')
+  page = File.read(file).gsub('\n','')
+  doc = Nokogiri::HTML(page)
 
+  doc.xpath('//script').remove 
+
+  topic = doc.at_css('h1').text.gsub('?','').gsub('/',' ').gsub('!', '')
+
+  css_link = Nokogiri::XML::Node.new('link', doc)
+  css_link['href'] = '/sg.css'
+  css_link['rel'] = 'stylesheet'
+  head = Nokogiri::XML::Node.new('head',doc)
+  head.add_child(css_link)
+  doc.at_css('html').add_child(head)
+
+  meta = Nokogiri::XML::Node.new('meta', doc)
+  meta['charset'] = "utf-8"
+
+  doc.at_css('head').add_child(meta)
   filename = File.join('by_topic', topic+'.html')
   puts filename
-  File.new(filename, 'w+').write(page)
+  File.new(filename, 'w+').write(doc.to_html)
 end
 
 # create an index file

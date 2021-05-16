@@ -1,0 +1,8 @@
+.Item {
+  border-style: double;
+  margin: 1em;
+  width: 75%;
+}
+li {
+  list-style: none;
+}
