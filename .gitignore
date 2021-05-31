@@ -1,1 +1,4 @@
 .DS*
+*.swp
+index.html
+test.db*
