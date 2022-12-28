@@ -23,8 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_111955) do
 
   create_table "posts", force: :cascade do |t|
     t.text "message"
-    t.bigint "author_id"
-    t.string "references"
+    t.bigint "author_id", null: false
     t.datetime "posted_at", precision: nil
     t.bigint "topic_id", null: false
     t.datetime "created_at", null: false
@@ -36,11 +35,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_111955) do
   create_table "topics", force: :cascade do |t|
     t.bigint "author_id", null: false
     t.string "filename"
+    t.text "topic"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_topics_on_author_id"
   end
 
+  add_foreign_key "posts", "authors"
   add_foreign_key "posts", "topics"
   add_foreign_key "topics", "authors"
 end

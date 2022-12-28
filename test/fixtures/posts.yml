@@ -2,14 +2,12 @@
 
 one:
   message: MyText
-  author: MyString
-  references: MyString
+  author: one
   posted_at: 2022-12-27 13:19:55
   topic: one
 
 two:
   message: MyText
-  author: MyString
-  references: MyString
+  author: two
   posted_at: 2022-12-27 13:19:55
   topic: two
