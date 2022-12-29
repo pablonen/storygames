@@ -1,3 +1,9 @@
 <%= turbo_frame_tag "search_result" do %>
-  <%= @content %>
+  <ol>
+    <% @documents.each do |doc| %>
+      <li>
+        <%= content_tag :p, doc.searchable_type %> <%= content_tag :p, doc.content %>
+      </li>
+    <% end %>
+  </ol>
 <% end %>

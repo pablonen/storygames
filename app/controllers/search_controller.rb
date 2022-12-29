@@ -3,6 +3,6 @@ class SearchController < ApplicationController
   end
 
   def search
-    @content = PgSearch.multisearch(params[:query]).select(:content).pluck(:content).join(',')
+    @documents = PgSearch.multisearch(params[:query])
   end
 end
