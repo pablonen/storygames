@@ -1,0 +1,12 @@
+<h1>Search Storygames archive</h1>
+<%= turbo_frame_tag "search", target: "search_result" do %>
+  <%= form_with url: "/search", method: :get do |form| %>
+    <%= form.label :query, "Search for:" %>
+    <%= form.text_field :query %>
+    <%= form.submit "Search" %>
+  <% end %>
+<% end %>
+
+<h3>Result</h3>
+<%= turbo_frame_tag "search_result" %>
+
